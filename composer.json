@@ -1,0 +1,17 @@
+{
+    "name": "erfan/phpiggy",
+    "description": "A PHP aplication for tracking expenses.",
+    "type": "project",
+    "authors": [
+        {
+            "name": "erfan"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Framework\\": "src/Framework",
+            "App\\": "src/App"
+    }
+}
+}
