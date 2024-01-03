@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Framework;
 
+
 class App
 {
     private Router $router;
@@ -14,12 +15,14 @@ class App
     }
     public function run()
     {
-        echo "app is running!";
+        $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+        $method = $_SERVER["REQUEST_METHOD"];
+
+        $this->router->dispatch($path, $method);
     }
 
-    public function addGetRout(string $path)
+    public function addGetRout(string $path, array $controller)
     {
-        $this->router->add("GET", $path);
+        $this->router->add("GET", $path, $controller);
     }
-
 }

@@ -7,6 +7,3 @@ $app = require __DIR__ . "/../src/App/bootstrat.php";
 
 
 $app->run();
-$app->addGetRout("/");
-
-dd($app);
