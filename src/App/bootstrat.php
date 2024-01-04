@@ -5,11 +5,13 @@ declare(strict_types=1);
 require __DIR__ . "/../../vendor/autoload.php";
 
 use Framework\App;
-use App\Controllers\HomeController;
+use App\Config\{Routs, Paths};
 
-$app = new App();
+$app = new App(Paths::SOURCE . "/App/container-definitions.php");
 
-$app->addGetRout("/", [HomeController::class, "home"]);
+foreach (Routs::ROUTS as $rout) {
+    $app->addGetRout($rout["path"], $rout["controller"]);
+}
 
 
 

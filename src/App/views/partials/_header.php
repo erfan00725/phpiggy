@@ -1,3 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><?php echo e($title) ?></title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/main.css" />
+</head>
+
+<body class="bg-indigo-50 font-['Outfit']">
+
+
+
     <!-- Start Header -->
     <header class="bg-indigo-900">
         <nav class="mx-auto flex container items-center justify-between py-4" aria-label="Global">

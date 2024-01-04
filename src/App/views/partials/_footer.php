@@ -3,3 +3,8 @@
         &copy; PHPiggy
     </footer>
     <!-- End Footer -->
+
+
+    </body>
+
+    </html>
