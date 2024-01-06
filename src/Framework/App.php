@@ -32,4 +32,9 @@ class App
     {
         $this->router->add("GET", $path, $controller);
     }
+
+    public function addMiddleWare(string $middleWare)
+    {
+        $this->router->addMiddleWare($middleWare);
+    }
 }
