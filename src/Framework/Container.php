@@ -10,6 +10,7 @@ use Framework\Exceptions\ContainerException;
 class Container
 {
     private array $definitions = [];
+    private array $resolved = [];
 
     public function addDefinition(array $newDefinition)
     {
@@ -31,7 +32,7 @@ class Container
         }
 
         $params = $construct->getParameters();
-        
+
 
         if (count($params) === 0) {
             return $className;
@@ -51,6 +52,8 @@ class Container
                 throw new ContainerException("Failed to resolve class {$className} because invalid param name.");
             }
 
+
+
             $dependencies[] = $this->get($type->getName());
         }
 
@@ -66,6 +69,12 @@ class Container
         $factory = $this->definitions[$id];
 
         $dependency = $factory();
+
+        if (array_key_exists($id, $this->resolved)) {
+            return $this->resolved[$id];
+        }
+
+        $this->resolved[$id] = $dependency;
 
         return $dependency;
     }

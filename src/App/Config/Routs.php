@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Config;
 
-use App\Controllers\{AboutController, HomeController};
+use App\Controllers\{AboutController, HomeController, AuthController};
 
 class Routs
 {
@@ -16,6 +16,15 @@ class Routs
         [
             "path" => "/about",
             "controller" => [AboutController::class, "about"],
+        ],
+        [
+            "path" => "/register",
+            "controller" => [AuthController::class, "registerView"],
+        ],
+        [
+            "path" => "/register",
+            "controller" => [AuthController::class, "register"],
+            "POST" => true,
         ]
     ];
 }

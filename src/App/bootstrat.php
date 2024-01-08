@@ -12,10 +12,18 @@ use function App\Config\registerMiddleWare;
 
 $app = new App(Paths::SOURCE . "/App/container-definitions.php");
 
-foreach (Routs::ROUTS as $rout) {
-    $app->addGetRout($rout["path"], $rout["controller"]);
+function registerRouts(App $app)
+{
+    foreach (Routs::ROUTS as $rout) {
+        if (array_key_exists("POST", $rout)) {
+            $app->addPostRout($rout["path"], $rout["controller"]);
+            return;
+        }
+        $app->addGetRout($rout["path"], $rout["controller"]);
+    }
 }
 
+registerRouts($app);
 registerMiddleWare($app);
 
 return $app;
