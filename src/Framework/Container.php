@@ -27,15 +27,16 @@ class Container
 
         $construct = $refelctionClass->getConstructor();
 
+
         if (!$construct) {
-            return $className;
+            return new $className;
         }
 
         $params = $construct->getParameters();
 
 
         if (count($params) === 0) {
-            return $className;
+            return new $className;
         }
 
         $dependencies = [];
