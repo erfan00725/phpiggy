@@ -7,8 +7,12 @@ require __DIR__ . "/Config/MiddleWare.php";
 
 use Framework\App;
 use App\Config\{Routs, Paths};
+use Dotenv\Dotenv;
 
 use function App\Config\registerMiddleWare;
+
+$dotenv = Dotenv::createImmutable(Paths::ROOT);
+$dotenv->load();
 
 $app = new App(Paths::SOURCE . "/App/container-definitions.php");
 
