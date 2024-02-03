@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace Framework;
 
-use PDO, PDOException;
+use PDO, PDOException , PDOStatement;
 
 class Database
 {
 
-    public  PDO $conncection;
+    private PDO $conncection;
+    private PDOStatement $stmt;
+
     public function __construct(string $driver, array $config, string $username, string $password)
     {
         $config = http_build_query(data: $config, arg_separator: ';');
@@ -21,5 +23,16 @@ class Database
         } catch (PDOException $e) {
             die("Unable to connect to database!");
         }
+    }
+    public function query(string $query , array $params = []): Database{
+        $this->stmt = $this->conncection->prepare($query);
+
+        $this->stmt->execute($params);
+
+        return $this;
+    }
+
+    public function count(){
+        return $this->stmt->fetchColumn();
     }
 }

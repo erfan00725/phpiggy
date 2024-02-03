@@ -12,7 +12,7 @@ $db = new Database('mysql', [
 
 $sqlFile = file_get_contents("./database.sql");
 
-$db->conncection->query($sqlFile);
+$db->query($sqlFile);
 
 // try {
 
