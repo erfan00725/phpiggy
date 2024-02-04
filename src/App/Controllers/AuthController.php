@@ -15,7 +15,7 @@ class AuthController
     }
     public function registerView()
     {
-        echo $this->view->render("register.php", []);
+        echo $this->view->render("register.php");
     }
     public function register()
     {
@@ -28,5 +28,15 @@ class AuthController
         $this->userService->registerUser($_POST);
 
         redirectTo('/');
+    }
+    public function loginView()
+    {
+        echo $this->view->render("login.php");
+    }
+
+    public function login(){
+        $this->validatorService->validateRegister($_POST);
+
+        echo "hi";
     }
 }

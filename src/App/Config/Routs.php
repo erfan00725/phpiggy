@@ -18,6 +18,15 @@ class Routs
             "controller" => [AboutController::class, "about"],
         ],
         [
+            "path" => "/login",
+            "controller" => [AuthController::class, "loginView"],
+        ],
+        [
+            "path" => "/login",
+            "controller" => [AuthController::class, "login"],
+            "POST" => true,
+        ],
+        [
             "path" => "/register",
             "controller" => [AuthController::class, "registerView"],
         ],
