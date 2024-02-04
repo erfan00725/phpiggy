@@ -21,3 +21,12 @@ function redirectTo(string $path)
     http_response_code(302);
     exit;
 }
+
+function debug_to_console($data)
+{
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}

@@ -21,9 +21,12 @@ function registerRouts(App $app)
     foreach (Routs::ROUTS as $rout) {
         if (array_key_exists("POST", $rout)) {
             $app->addPostRout($rout["path"], $rout["controller"]);
-            return;
+            continue;
         }
         $app->addGetRout($rout["path"], $rout["controller"]);
+        foreach ($rout["middleware"] ?? [] as $middleware) {
+            $app->addRouterMiddleware($middleware);
+        }
     }
 }
 

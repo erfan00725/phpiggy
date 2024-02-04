@@ -10,7 +10,7 @@ use Framework\Exceptions\ValidationException;
 
 class AuthController
 {
-    public function __construct(private TemplateEngine $view, private ValidatorService $validatorService , private UserService $userService)
+    public function __construct(private TemplateEngine $view, private ValidatorService $validatorService, private UserService $userService)
     {
     }
     public function registerView()
@@ -34,9 +34,22 @@ class AuthController
         echo $this->view->render("login.php");
     }
 
-    public function login(){
-        $this->validatorService->validateRegister($_POST);
+    public function login()
+    {
+        $this->validatorService->validateLogin($_POST);
 
-        echo "hi";
+
+        $this->userService->login($_POST);
+
+
+
+        redirectTo('/');
+    }
+
+    public function logout()
+    {
+        $this->userService->logout();
+
+        redirectTo("/login");
     }
 }

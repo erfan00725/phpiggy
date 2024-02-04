@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Framework;
 
-use PDO, PDOException , PDOStatement;
+use PDO, PDOException, PDOStatement;
 
 class Database
 {
@@ -19,12 +19,15 @@ class Database
         $dsn = "{$driver}:{$config}";
 
         try {
-            $this->conncection = new PDO($dsn, $username, $password);
+            $this->conncection = new PDO($dsn, $username, $password, [
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            ]);
         } catch (PDOException $e) {
             die("Unable to connect to database!");
         }
     }
-    public function query(string $query , array $params = []): Database{
+    public function query(string $query, array $params = []): Database
+    {
         $this->stmt = $this->conncection->prepare($query);
 
         $this->stmt->execute($params);
@@ -32,7 +35,18 @@ class Database
         return $this;
     }
 
-    public function count(){
+    public function count()
+    {
         return $this->stmt->fetchColumn();
+    }
+
+    public function getData()
+    {
+        return $this->stmt->fetch();
+    }
+
+    public function getUserId()
+    {
+        return $this->conncection->lastInsertId();
     }
 }

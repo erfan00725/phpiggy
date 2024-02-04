@@ -18,6 +18,13 @@ class SessionMiddleware implements MiddlewareInterface
         if (headers_sent()) {
             throw new SessionException("Headers already sent!");
         }
+
+        session_set_cookie_params([
+            'secure' => $_ENV['APP_ENV'] === "production",
+            'httponly' => true,
+            'samesite' => 'lax',
+        ]);
+
         session_start();
 
         $next();

@@ -18,6 +18,7 @@ class Router
             'path' => $path,
             'method' => strtoupper($method),
             "controller" => $controller,
+            'middleware' => []
         ];
     }
     private function normalizePath(string $path): string
@@ -47,7 +48,9 @@ class Router
 
             $action = fn () => $controllerInstance->{$method}();
 
-            foreach ($this->middleWares as $middleWare) {
+            $allMiddlewares = [...$route['middleware'], ...$this->middleWares];
+
+            foreach ($allMiddlewares as $middleWare) {
                 $middleWareInstance = $container ? $container->resolve($middleWare) :
                     new $middleWare;
                 $action = fn () => $middleWareInstance->process($action);
@@ -62,5 +65,11 @@ class Router
     public function addMiddleWare(string $middleWare)
     {
         $this->middleWares[] = $middleWare;
+    }
+
+    public function addRouteMiddleware(string $middleware)
+    {
+        $lastRoutKey = array_key_last($this->routes);
+        $this->routes[$lastRoutKey]['middleware'][] = $middleware;
     }
 }
