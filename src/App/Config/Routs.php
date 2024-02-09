@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Config;
 
-use App\Controllers\{AboutController, HomeController, AuthController};
+use App\Controllers\{AboutController, HomeController, AuthController, TransactionController};
 use App\Middleware\{GuestOnlyMiddleware, AuthRequiredMiddleware};
 
 
@@ -45,6 +45,17 @@ class Routs
         [
             "path" => "/logout",
             "controller" => [AuthController::class, 'logout'],
+            "middleware" => [AuthRequiredMiddleware::class]
+        ],
+        [
+            "path" => "/transaction",
+            "controller" => [TransactionController::class, 'createView'],
+            "middleware" => [AuthRequiredMiddleware::class]
+        ],
+        [
+            "path" => "/transaction",
+            "POST" => true,
+            "controller" => [TransactionController::class, 'create'],
             "middleware" => [AuthRequiredMiddleware::class]
         ]
     ];
