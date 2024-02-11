@@ -57,6 +57,11 @@ class Routs
             "POST" => true,
             "controller" => [TransactionController::class, 'create'],
             "middleware" => [AuthRequiredMiddleware::class]
+        ],
+        [
+            "path" => "/transaction/{transaction}",
+            "controller" => [TransactionController::class, 'editView'],
+            "middleware" => [AuthRequiredMiddleware::class]
         ]
     ];
 }

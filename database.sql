@@ -10,7 +10,7 @@ CREATE TAble IF NOT EXISTS users(
     PRIMARY KEY(id),
     UNIQUE KEY(email)
 );
-CREATE TAble IF NOT EXISTS transaction(
+CREATE TAble IF NOT EXISTS transactions(
     id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
     description VARCHAR(255) NOT NULl,
     amount DECIMAL(10,2) NOT NULL,

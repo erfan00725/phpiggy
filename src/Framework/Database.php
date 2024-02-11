@@ -45,6 +45,11 @@ class Database
         return $this->stmt->fetch();
     }
 
+    public function getAllData()
+    {
+        return $this->stmt->fetchAll();
+    }
+
     public function getUserId()
     {
         return $this->conncection->lastInsertId();
