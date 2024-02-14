@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Framework\TemplateEngine;
 use App\Config\Paths;
-use App\Services\{ValidatorService, UserService, TransactionService};
+use App\Services\{ValidatorService, UserService, TransactionService, ReceiptService};
 use Framework\{Database, Container};
 
 return [
@@ -15,14 +15,19 @@ return [
         'port' => $_ENV["DB_PORT"],
         'dbname' => $_ENV["DB_NAME"]
     ], $_ENV["DB_USER"], $_ENV["DB_PASS"]),
-    UserService::class => function(Container $container) {
+    UserService::class => function (Container $container) {
         $db = $container->get(Database::class);
 
         return new UserService($db);
     },
-    TransactionService::class => function(Container $container) {
+    TransactionService::class => function (Container $container) {
         $db = $container->get(Database::class);
 
         return new TransactionService($db);
+    },
+    ReceiptService::class => function (Container $container) {
+        $db = $container->get(Database::class);
+
+        return new ReceiptService($db);
     }
 ];

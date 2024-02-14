@@ -19,11 +19,10 @@ $app = new App(Paths::SOURCE . "/App/container-definitions.php");
 function registerRouts(App $app)
 {
     foreach (Routs::ROUTS as $rout) {
-        if (array_key_exists("POST", $rout)) {
-            $app->addPostRout($rout["path"], $rout["controller"]);
-            continue;
-        }
-        $app->addGetRout($rout["path"], $rout["controller"]);
+
+        $method = $rout['method'] ?? "GET";
+
+        $app->addRout($rout["path"], $method, $rout["controller"]);
         foreach ($rout["middleware"] ?? [] as $middleware) {
             $app->addRouterMiddleware($middleware);
         }

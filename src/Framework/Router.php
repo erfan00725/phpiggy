@@ -14,7 +14,7 @@ class Router
 
         $path = $this->normalizePath($path);
 
-        $regexPath = preg_replace('#{[^/]+}#' , '([^/]+)', $path);
+        $regexPath = preg_replace('#{[^/]+}#', '([^/]+)', $path);
 
         $this->routes[] = [
             'path' => $path,
@@ -22,7 +22,7 @@ class Router
             "controller" => $controller,
             'middleware' => [],
             'regexPath' => $regexPath
-        ];  
+        ];
     }
     private function normalizePath(string $path): string
     {
@@ -37,22 +37,22 @@ class Router
     public function dispatch(string $path, string $method, Container $container = null)
     {
         $path = $this->normalizePath($path);
-        $method = strtoupper($method);
+        $method = strtoupper($_POST['_METHOD'] ?? $method);
 
         // regex nafahmidam
 
         foreach ($this->routes as $route) {
-            if (!preg_match("#^{$route['regexPath']}$#", $path , $paramValues) || $route["method"] !== $method) {
+            if (!preg_match("#^{$route['regexPath']}$#", $path, $paramValues) || $route["method"] !== $method) {
                 continue;
             }
 
             array_shift($paramValues);
 
-            preg_match_all('#{([^/]+)}#' , $route['path'] , $paramKeys);
+            preg_match_all('#{([^/]+)}#', $route['path'], $paramKeys);
 
             $paramKeys = $paramKeys[1];
 
-            $params = array_combine($paramKeys , $paramValues);
+            $params = array_combine($paramKeys, $paramValues);
 
             [$class, $method] = $route["controller"];
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Config;
 
-use App\Controllers\{AboutController, HomeController, AuthController, TransactionController};
+use App\Controllers\{AboutController, HomeController, AuthController, TransactionController, ReceiptController};
 use App\Middleware\{GuestOnlyMiddleware, AuthRequiredMiddleware};
 
 
@@ -28,7 +28,7 @@ class Routs
         [
             "path" => "/login",
             "controller" => [AuthController::class, "login"],
-            "POST" => true,
+            "method" => "POST",
             "middleware" => [GuestOnlyMiddleware::class]
         ],
         [
@@ -39,7 +39,7 @@ class Routs
         [
             "path" => "/register",
             "controller" => [AuthController::class, "register"],
-            "POST" => true,
+            "method" => "POST",
             "middleware" => [GuestOnlyMiddleware::class]
         ],
         [
@@ -54,7 +54,7 @@ class Routs
         ],
         [
             "path" => "/transaction",
-            "POST" => true,
+            "method" => "POST",
             "controller" => [TransactionController::class, 'create'],
             "middleware" => [AuthRequiredMiddleware::class]
         ],
@@ -62,6 +62,30 @@ class Routs
             "path" => "/transaction/{transaction}",
             "controller" => [TransactionController::class, 'editView'],
             "middleware" => [AuthRequiredMiddleware::class]
-        ]
+        ],
+        [
+            "path" => "/transaction/{transaction}",
+            "method" => "POST",
+            "controller" => [TransactionController::class, 'edit'],
+            "middleware" => [AuthRequiredMiddleware::class]
+        ],
+        [
+            "path" => "/transaction/{transaction}",
+            "method" => "DELETE",
+            "controller" => [TransactionController::class, 'delete'],
+            "middleware" => [AuthRequiredMiddleware::class]
+        ],
+        [
+            "path" => "/transaction/{transaction}/receipt",
+            "controller" => [ReceiptController::class, 'uploadView'],
+            "middleware" => [AuthRequiredMiddleware::class]
+        ],
+        [
+            "path" => "/transaction/{transaction}/receipt",
+            "method" => "POST",
+            "controller" => [ReceiptController::class, 'upload'],
+            "middleware" => [AuthRequiredMiddleware::class]
+        ],
+
     ];
 }

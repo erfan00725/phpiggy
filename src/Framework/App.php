@@ -28,13 +28,9 @@ class App
         $this->router->dispatch($path, $method, $this->container);
     }
 
-    public function addGetRout(string $path, array $controller)
+    public function addRout(string $path, string $method, array $controller)
     {
-        $this->router->add("GET", $path, $controller);
-    }
-    public function addPostRout(string $path, array $controller)
-    {
-        $this->router->add("POST", $path, $controller);
+        $this->router->add($method, $path, $controller);
     }
 
     public function addMiddleWare(string $middleWare)
