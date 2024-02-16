@@ -30,7 +30,9 @@ class Database
     {
         $this->stmt = $this->conncection->prepare($query);
 
-        $this->stmt->execute($params);
+        if (!$this->stmt->execute($params)) {
+            throw new PDOException();
+        }
 
         return $this;
     }

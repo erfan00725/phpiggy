@@ -86,6 +86,16 @@ class Routs
             "controller" => [ReceiptController::class, 'upload'],
             "middleware" => [AuthRequiredMiddleware::class]
         ],
-
+        [
+            "path" => "/transaction/{transaction}/receipt/{receipt}",
+            "controller" => [ReceiptController::class, 'download'],
+            "middleware" => [AuthRequiredMiddleware::class]
+        ],
+        [
+            "path" => "/transaction/{transaction}/receipt/{receipt}",
+            "method" => "DELETE",
+            "controller" => [ReceiptController::class, 'delete'],
+            "middleware" => [AuthRequiredMiddleware::class]
+        ],
     ];
 }
